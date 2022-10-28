@@ -7,24 +7,11 @@ import io.swagger.client.model.LiftRide;
 
 public class SkiersClientThread extends Thread {
 
-  protected AtomicInteger successfulCount;
-  protected AtomicInteger unsuccessfulCount;
-
-  public SkiersClientThread() {
-//    this.successfulCount = new AtomicInteger(0);
-//    this.unsuccessfulCount = new AtomicInteger(0);
-  }
-
-  public SkiersClientThread(AtomicInteger successfulCount, AtomicInteger unsuccessfulCount) {
-    this.successfulCount = successfulCount;
-    this.unsuccessfulCount = unsuccessfulCount;
-  }
-
   @Override
   public void run() {
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 50; i++) {
       SkiersApi skiersApi = new SkiersApi();
-      skiersApi.getApiClient().setBasePath("http://18.237.10.252:8080/lab2_war/");
+      skiersApi.getApiClient().setBasePath("http://localhost:8080/lab2_war_exploded/");
       LiftRide liftRideBody = new LiftRide();
       LiftRideEvent liftRideEvent = new LiftRideEvent();
       liftRideBody.setTime(liftRideEvent.getTime());
@@ -43,19 +30,12 @@ public class SkiersClientThread extends Thread {
           statusCode = resp.getStatusCode();
           cnt++;
         }
-        if (statusCode == 200) {
-          successfulCount.incrementAndGet();
-        } else {
-          unsuccessfulCount.incrementAndGet();
-        }
       } catch (ApiException e) {
         System.err.println("Exception when calling SkiersApi#writeNewLiftRideWithHttpInfo");
         e.printStackTrace();
       }
     }
 
-    SkiersClient.latch.countDown();
-    SkiersClient.latch2.countDown();
-    LatencyTest.testLatch.countDown();
+    SkiersClientRabbitMQ.latch.countDown();
   }
 }
