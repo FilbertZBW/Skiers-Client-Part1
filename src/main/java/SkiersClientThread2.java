@@ -11,7 +11,7 @@ public class SkiersClientThread2 extends Thread {
   public void run() {
     for (int i = 0; i < 50; i++) {
       SkiersApi skiersApi = new SkiersApi();
-      skiersApi.getApiClient().setBasePath("http://localhost:8081/lab2_war_exploded/");
+      skiersApi.getApiClient().setBasePath("http://localhost:8080/lab2_war_exploded/");
       LiftRide liftRideBody = new LiftRide();
       LiftRideEvent liftRideEvent = new LiftRideEvent();
       liftRideBody.setTime(liftRideEvent.getTime());

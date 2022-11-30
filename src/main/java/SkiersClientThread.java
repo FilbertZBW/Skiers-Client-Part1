@@ -9,7 +9,7 @@ public class SkiersClientThread extends Thread {
 
   @Override
   public void run() {
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 100; i++) {
       SkiersApi skiersApi = new SkiersApi();
       skiersApi.getApiClient().setBasePath("http://localhost:8080/lab2_war_exploded/");
       LiftRide liftRideBody = new LiftRide();

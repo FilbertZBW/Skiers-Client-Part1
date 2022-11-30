@@ -5,13 +5,15 @@ public class LiftRideEvent {
   private final int resortID;
   private final int liftID;
   private final int time;
+  private final int dayID;
 
   public LiftRideEvent() {
     Random random = new Random();
-    this.skierID = random.nextInt(100000) + 1;
+    this.skierID = random.nextInt(100) + 1;
     this.resortID = random.nextInt(10) + 1;
     this.liftID = random.nextInt(40) + 1;
     this.time = random.nextInt(360) + 1;
+    this.dayID = random.nextInt(365) + 1;
   }
 
   public int getSkierID() {
@@ -31,7 +33,7 @@ public class LiftRideEvent {
   }
 
   public String getDayID() {
-    return "1";
+    return dayID + "";
   }
 
   public int getTime() {
